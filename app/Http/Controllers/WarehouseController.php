@@ -19,9 +19,9 @@ class WarehouseController extends Controller
     {
         $fields = ['id', 'name', 'photo'];
         $warehouse = $this->warehouseService->getAll($fields);
-        return response()->json(WarehouseResource::collection($warehouse)); 
+        return response()->json(WarehouseResource::collection($warehouse));
     }
-    public function show($id)
+    public function show(int $id)
     {
         try{
             $fields = ['id', 'name', 'photo'];
@@ -40,7 +40,7 @@ class WarehouseController extends Controller
         return response()->json(new WarehouseResource($warehouse), 201);
     }
     public function update(WarehouseRequest $request, $id)
-    { 
+    {
         try{
             $warehouse = $this->warehouseService->update($id, $request->validated());
             return response()->json(new WarehouseResource($warehouse));
@@ -50,7 +50,7 @@ class WarehouseController extends Controller
             ]);
         }
     }
-    public function destroy($id)
+    public function destroy(int $id)
     {
         try{
             $this->warehouseService->delete($id);

@@ -27,7 +27,7 @@ class MerchantService
         }
         return $this->merchant_repo->create($data);
     }
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
         $fields = ['*'];
         $merchant = $this->merchant_repo->getById($id, $fields);
@@ -40,7 +40,7 @@ class MerchantService
         }
         return $this->merchant_repo->update($id, $data);
     }
-    public function delete($id)
+    public function delete(int $id)
     {
         $fields = ['*'];
         $merchant = $this->merchant_repo->getById($id, $fields);
@@ -49,7 +49,7 @@ class MerchantService
         }
         $this->merchant_repo->delete($id);
     }
-    public function getByKeeperId($keeperId)
+    public function getByKeeperId(string $keeperId)
     {
         $fields = ['*'];
         return $this->merchant_repo->getByKeeperId($keeperId, $fields);
@@ -59,7 +59,7 @@ class MerchantService
     {
         return $photo->store('merchants', 'public');
     }
-    private function deletePhoto($photoPath)
+    private function deletePhoto(string $photoPath)
     {
         $relativePath = 'merchants/'.basename($photoPath);
         if(Storage::disk('public')->exists($relativePath)){

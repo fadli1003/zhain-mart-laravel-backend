@@ -16,17 +16,17 @@ class CategoryService
     {
         $this->category_repo->getAll($fields);
     }
-    public function getById($id, array $fields)
+    public function getById(int $id, array $fields)
     {
         return $this->category_repo->getById($id, $fields ?? ['*']);
     }
-    public function create($data)
+    public function create(array $data)
     {
         if(isset($data['photo']) && $data['photo'] instanceof UploadedFile){
             $data['photo'] = $this->uploadPhoto($data['photo']);
         }
     }
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
         $fields = ['id', 'photo'];
         $category = $this->category_repo->getById($id, $fields);
@@ -39,7 +39,7 @@ class CategoryService
         }
         return $this->category_repo->update($id, $data);
     }
-    public function delete($id)
+    public function delete(int $id)
     {
         $fields = ['id', 'photo'];
         $category = $this->category_repo->getById($id, $fields);

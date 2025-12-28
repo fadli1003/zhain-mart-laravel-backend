@@ -19,9 +19,9 @@ class CategoryController extends Controller
     {
         $fields = ['id', 'name', 'photo', 'tagline'];
         $categories = $this->categoryService->getAll($fields);
-        return response()->json(CategoryResource::collection($categories)); 
+        return response()->json(CategoryResource::collection($categories));
     }
-    public function show($id)
+    public function show(int $id)
     {
         try{
             $fields = ['id', 'name', 'photo', 'tagline'];
@@ -40,7 +40,7 @@ class CategoryController extends Controller
         return response()->json(new CategoryResource($category), 201);
     }
     public function update(CategoryRequest $request, $id)
-    { 
+    {
         try{
             $category = $this->categoryService->update($id, $request->validated());
             return response()->json(new CategoryResource($category));
@@ -50,7 +50,7 @@ class CategoryController extends Controller
             ]);
         }
     }
-    public function destroy($id)
+    public function destroy(int $id)
     {
         try{
             $this->categoryService->delete($id);

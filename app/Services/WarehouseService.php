@@ -41,7 +41,7 @@ class WarehouseService
         }
         return $this->warehouse_repo->update($id, $data);
     }
-    public function delete($id)
+    public function delete(int $id)
     {
         $fields = ['id', 'photo'];
         $warehouse = $this->warehouse_repo->getById($id, $fields);
@@ -51,14 +51,14 @@ class WarehouseService
         $this->warehouse_repo->delete($id);
     }
 
-    public function attachProduct($warehouseId, $productId, $stock)
+    public function attachProduct(int $warehouseId, int $productId, int $stock)
     {
         $warehouse = $this->warehouse_repo->getById($warehouseId, ['id']);
         $warehouse->products()->syncWithoutDetaching([
             $productId => ['stock' => $stock],
         ]);
     }
-    public function detachProduct($warehouseId, $productId)
+    public function detachProduct(int $warehouseId, int $productId)
     {
         $warehouse = $this->warehouse_repo->getById($warehouseId, ['id']);
         $warehouse->products()->detach($productId);
@@ -83,5 +83,5 @@ class WarehouseService
         if(Storage::disk('public')->exists($relativePath)){
             Storage::disk('public')->delete($relativePath);
         }
-    } 
+    }
 }

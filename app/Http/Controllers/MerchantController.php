@@ -19,9 +19,9 @@ class MerchantController extends Controller
     {
         $fields = ['*'];
         $merchant = $this->merchantService->getAll($fields ? : ['*']);
-        return response()->json(MerchantResource::collection($merchant)); 
+        return response()->json(MerchantResource::collection($merchant));
     }
-    public function show($id)
+    public function show(int $id)
     {
         try{
             $fields = ['id', 'name', 'photo', 'keeper_id'];
@@ -39,8 +39,8 @@ class MerchantController extends Controller
         $merchant = $this->merchantService->create($request->validated());
         return response()->json(new MerchantResource($merchant), 201);
     }
-    public function update(MerchantRequest $request, $id)
-    { 
+    public function update(MerchantRequest $request, int $id)
+    {
         try{
             $merchant = $this->merchantService->update($id, $request->validated());
             return response()->json(new MerchantResource($merchant));
@@ -50,7 +50,7 @@ class MerchantController extends Controller
             ]);
         }
     }
-    public function destroy($id)
+    public function destroy(int $id)
     {
         try{
             $this->merchantService->delete($id);

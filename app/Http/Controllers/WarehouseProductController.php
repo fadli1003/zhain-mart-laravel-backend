@@ -13,7 +13,7 @@ class WarehouseProductController extends Controller
     {
         $this->warehouseService = $warehouseService;
     }
-    public function attach(Request $request, $warehouseId)
+    public function attach(Request $request, int $warehouseId)
     {
         $request->validate([
             'product_id' => 'required|exists:products,id',
@@ -28,12 +28,12 @@ class WarehouseProductController extends Controller
 
         return response()->json(['message' => 'Product attached succesfully.']);
     }
-    public function detach($warehouseId, $productId)
+    public function detach(int $warehouseId, int $productId)
     {
         $this->warehouseService->detachProduct($warehouseId, $productId);
         return response()->json(['message' => 'Product detached succesfully.']);
     }
-    public function update(WarehouseProductUpdateRequest $request, $warehouseId, $productId)
+    public function update(WarehouseProductUpdateRequest $request, int $warehouseId, int $productId)
     {
         $warehouseProduct = $this->warehouseService->updateProductStock(
             $warehouseId,

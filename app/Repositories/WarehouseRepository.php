@@ -9,7 +9,7 @@ class WarehouseRepository
     {
         return Warehouse::select($fields)->with(['products.category'])->latest()->paginate(30);
     }
-    public function getById($id, array $fields)
+    public function getById(int $id, array $fields)
     {
         return Warehouse::select($fields)->with(['products.category'])->findOrFail($id);
     }
@@ -17,13 +17,13 @@ class WarehouseRepository
     {
         return Warehouse::create($data);
     }
-    public function update($id, array $data)
+    public function update(int $id, array $data)
     {
         $Warehouse = Warehouse::findOrFail($id);
         $Warehouse->update($data);
         return $Warehouse;
     }
-    public function delete($id)
+    public function delete(int $id)
     {
         $Warehouse = Warehouse::findOrFail($id);
         $Warehouse->delete();
