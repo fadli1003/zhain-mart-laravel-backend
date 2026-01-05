@@ -14,7 +14,7 @@ class CategoryService
     }
     public function getAll(array $fields)
     {
-        $this->category_repo->getAll($fields);
+        return $this->category_repo->getAll($fields);
     }
     public function getById(int $id, array $fields)
     {

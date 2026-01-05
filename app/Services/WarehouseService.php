@@ -15,7 +15,7 @@ class WarehouseService
     }
     public function getAll(array $fields)
     {
-        $this->warehouse_repo->getAll($fields);
+        return $this->warehouse_repo->getAll($fields);
     }
     public function getById($id, array $fields)
     {

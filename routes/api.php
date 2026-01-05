@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MerchantProductController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\WarehouseProductController;
 use App\Http\Controllers\UserController;
@@ -23,4 +24,11 @@ Route::middleware(['auth:sanctum', 'role:manager'])->group(function (){
     Route::get('/product', [ProductController::class, 'index']);
 });
 
-// Route::get('/category', [CategoryController::class, 'index']);
+Route::get('/merchant', [MerchantController::class, 'index']);
+Route::get('/category', [CategoryController::class, 'index']);
+Route::post('/merchant', [MerchantController::class, 'store']);
+Route::get('/merchant/{id}', [MerchantController::class, 'show']);
+// Route::get('test', function(){
+//     return ['message' => 'pesan dari api.'];           //work
+// });
+// Route::get('/test', [TestController::class, 'index']);

@@ -10,9 +10,9 @@ use Illuminate\Validation\ValidationException;
 
 class MerchantProductService
 {
-    private $merchantProduct_repo;
-    private $warehouseProduct_repo;
-    private $merchant_repo;
+    private MerchantRepository $merchant_repo;
+    private MerchantProductRepository $merchantProduct_repo;
+    private WarehouseProductRepository $warehouseProduct_repo;
 
     public function __construct(
         MerchantRepository $merchant_repo,
@@ -37,7 +37,7 @@ class MerchantProductService
                 throw ValidationException::withMessages([
                     'stock' => ['Insufficient stock in warehouse.']
                 ]);
-                
+
             }
 
             $existingProduct = $this->merchantProduct_repo->getByMerchantAndProduct(
@@ -47,7 +47,7 @@ class MerchantProductService
             if($existingProduct){
                 throw ValidationException::withMessages([
                     'product' => ['Product already exists in this merchant.']
-                ]);            
+                ]);
             }
 
             $this->warehouseProduct_repo->updateStock(
@@ -69,7 +69,7 @@ class MerchantProductService
                     'product' => ['Product not assigned to this merchant.']
                 ]);
             }
-            
+
             if(!$warehouseId){
                 throw ValidationException::withMessages([
                     'warehouse_id' => ['Warehouse ID is required when increasing stock.']
@@ -78,7 +78,7 @@ class MerchantProductService
 
             $currentStock = $exist->stock;
             if($newStock > $currentStock){
-                $diff = $newStock - $currentStock; 
+                $diff = $newStock - $currentStock;
                 if(!$warehouseProduct || $warehouseProduct->stock < $diff){
                     throw ValidationException::withMessages([
                         'stock' => ['Insufficient stock in warehouse.']

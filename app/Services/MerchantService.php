@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\Storage;
 
 class MerchantService
 {
-    private $merchant_repo;
+    private MerchantRepository $merchant_repo;
     public function __construct(MerchantRepository $merchantRepository)
     {
         $this->merchant_repo = $merchantRepository;
     }
     public function getAll(array $fields)
     {
-        $this->merchant_repo->getAll($fields);
+        return $this->merchant_repo->getAll($fields);
     }
     public function getById($id, array $fields)
     {
